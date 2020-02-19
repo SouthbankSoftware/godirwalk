@@ -98,7 +98,23 @@ func (l Dirents) Len() int { return len(l) }
 
 // Less returns true if and only if the base name of the element specified by
 // the first index is lexicographically less than that of the second index.
-func (l Dirents) Less(i, j int) bool { return l[i].name < l[j].name }
+func (l Dirents) Less(i, j int) bool {
+	var left, right string
+
+	if l[i].IsDir() {
+		left = l[i].name + string(os.PathSeparator)
+	} else {
+		left = l[i].name
+	}
+
+	if l[j].IsDir() {
+		right = l[j].name + string(os.PathSeparator)
+	} else {
+		right = l[j].name
+	}
+
+	return left < right
+}
 
 // Swap exchanges the two Dirent entries specified by the two provided indexes.
 func (l Dirents) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
