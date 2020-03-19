@@ -102,13 +102,13 @@ func (l Dirents) Less(i, j int) bool {
 	var left, right string
 
 	if l[i].IsDir() {
-		left = l[i].name + string(os.PathSeparator)
+		left = l[i].name + "/"
 	} else {
 		left = l[i].name
 	}
 
 	if l[j].IsDir() {
-		right = l[j].name + string(os.PathSeparator)
+		right = l[j].name + "/"
 	} else {
 		right = l[j].name
 	}
